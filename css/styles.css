@@ -1,0 +1,29 @@
+.bg-naranja {
+    background-color: #FF914D;
+}
+
+.bg-gris {
+    background-color: #DADADA;
+}
+
+.form-contenedor {
+    width: 80%; 
+}
+
+.texto {
+    margin-bottom: 3px;
+    font-size: 13px;
+}
+
+.btn {
+    background-color: #DADADA !important;
+    color: black !important;
+    border: 0 !important;
+    width: 100px;
+}
+
+h1 {
+    font-size: 40px !important;
+    font-weight: bold !important;
+}
+
