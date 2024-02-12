@@ -1,11 +1,28 @@
 new Vue({
   el: "#loginSection",
   data: {
-    sortBy: "id_section"
+    usuario: 'Andres',
+    clave: '123',
+    showMsgError: false
   },
   methods: {
-    clear(){
-    
+    verificarUsuario(){
+      let _this = this;
+      axios.post('index.php/Login/verificarLogin', {
+        usuario: this.usuario,
+        clave: this.clave
+      })
+      .then(function (response) {
+        let result = response.data.result;
+        if(result){
+          window.location.href = window.location.origin + "/index.php/pedidos/listado";
+        }else{
+          _this.showMsgError = true;
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
     }
   }
   

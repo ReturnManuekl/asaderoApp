@@ -21,29 +21,28 @@ class Login extends CI_Controller {
 	public function index()
 	{
 		$this->load->view('components/header', true);
-		$this->load->view('components/menu', true);
-		$this->load->view('pages/login');
+		$this->load->view('pages/login_v');
 		$this->load->view('components/footer', true);
 	}
 
 	public function verificarLogin(){
 
 		//Recolectamos datos que nos envian desde el Login
-		$usuario = $this->input->post('usuario');
-		$pass = $this->input->post('pass');
-
+		$data = json_decode(file_get_contents('php://input'), true);
+		$usuario = $data['usuario'];
+		$clave = $data['clave'];
 		//Cargamos modelo
 		$this->load->model('Login_m');
 
+		/*$this->load->database();
+		$result = $this->db->select('*')->from('paquetes')->get()->result_array();
+		echo json_encode($result);*/
+
 		//Ejecutamos funcion de modelo
-		$usuario_valido = $this->Login_m->comparaUsuario($usuario, $pass);
+		$usuario_valido = $this->Login_m->comparaUsuario($usuario, $clave);
 
 		//Si es valido mandamos correcto sino error
-		if($usuario_valido == true){
-			echo 'correcto';
-		}else{
-			echo 'error';
-		}
+		echo $usuario_valido ? '{"result":true}' : '{"result":false}';
 
 	}
 }

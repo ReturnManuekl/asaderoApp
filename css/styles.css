@@ -1,9 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+*{
+    font-family: 'Roboto';
+}
 .bg-naranja {
-    background-color: #FF914D;
+    /*background-color: #FF914D;*/
+    background: linear-gradient(0deg, rgba(255,198,111,1) 0%, rgba(255,145,77,1) 100%);
 }
 
 .bg-gris {
-    background-color: #DADADA;
+    background-color: #f1f1f1 !important;
 }
 
 .form-contenedor {
@@ -11,11 +16,10 @@
 }
 
 .texto {
-    margin-bottom: 3px;
-    font-size: 13px;
+    font-size: 18px;
 }
 
-.btn {
+.btn-main {
     background-color: #DADADA !important;
     color: black !important;
     border: 0 !important;
@@ -26,4 +30,19 @@ h1 {
     font-size: 40px !important;
     font-weight: bold !important;
 }
-
+.est-preparando{
+    border-left: 5px solid #77df84;
+}
+.est-en_camino{
+    border-left: 5px solid #188aff;
+}
+.est-entregado{
+    border-left: 5px solid #1e1e1e;
+}
+table.listado{
+    border-collapse: separate; 
+    border-spacing: 10px;
+}
+table.listado td{
+    vertical-align: middle;
+}
