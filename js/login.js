@@ -15,7 +15,7 @@ new Vue({
       .then(function (response) {
         let result = response.data.result;
         if(result){
-          window.location.href = window.location.origin + "/index.php/pedidos/listado";
+          window.location.href = "./index.php/pedidos/listado";
         }else{
           _this.showMsgError = true;
         }
