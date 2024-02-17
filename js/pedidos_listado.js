@@ -47,7 +47,8 @@ new Vue({
       .catch(function (error) {
         console.log(error);
       });
-    }
+    },
+    
   },
   mounted() {
     this.obtenerPedidos();

@@ -46,3 +46,7 @@ table.listado{
 table.listado td{
     vertical-align: middle;
 }
+
+.btn-paquete1 {
+    background-color: rgb(66, 87, 87) !important;
+}
