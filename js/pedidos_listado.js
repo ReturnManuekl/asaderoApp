@@ -1,20 +1,19 @@
 new Vue({
   el: "#pedidosListadoSection",
   data: {
+    diaFiltro: '',
     filtroEstado: 'todos',
-    usuario: 'Andres',
-    clave: '123',
-    showMsgError: false,
     pedidos: [],
     pedidoSelec: [],
     estadoPedidoModal: ''
   },
   methods: {
     obtenerPedidos(){
+      this.diaFiltro = this.diaFiltro == '' ? new Date().toISOString().split('T')[0] : this.diaFiltro;
       let _this = this;
       axios({
         method: 'get',
-        url: 'obtener_listado',
+        url: 'obtener_listado/' + this.diaFiltro,
       })
       .then(function (response) {
         _this.pedidos = response.data;
@@ -23,9 +22,18 @@ new Vue({
     nuevoPedido(){
       window.location.href = "../pedidos/nuevo_pedido";
     },
-    formatoHora(hora){
-      let separaHora = hora.split(':');
-      return separaHora[0]+':'+separaHora[1];
+    formatoHora(hora){ 
+      if(hora != undefined){
+        let separaHora = hora.split(':'), horaFormateada = '';
+        if(separaHora[0] < 13){
+          horaFormateada = separaHora[0] + ':' + separaHora[1] ;
+          horaFormateada += separaHora[0] == 12 ? ' pm' : ' am';
+        } else { 
+          separaHora[0] -= 12;
+          horaFormateada = separaHora[0] + ':' + separaHora[1] + ' pm';
+        }
+        return horaFormateada;
+      }
     },
     seleccionarPedido(pedido){
       this.pedidoSelec = pedido;
@@ -48,17 +56,29 @@ new Vue({
         console.log(error);
       });
     },
+    eliminarPedido(){
+      let _this = this;
+      axios.post('../pedidos/actualizarEstadoPedido', {
+        idPedido: this.pedidoSelec.id,
+        nuevoEstado: 'eliminado'
+      })
+      .then(function (response) {
+        let indexPedido = _this.pedidos.findIndex(item => item.id == _this.pedidoSelec.id);
+        _this.pedidos[indexPedido].estado = 'eliminado';
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    }
     
   },
   mounted() {
     this.obtenerPedidos();
   },
   computed: {
-    // a computed getter
     pedidosFiltrados() {
-      // `this` points to the component instance
       if(this.filtroEstado == 'todos'){
-        return this.pedidos;
+        return this.pedidos.filter(item => item.estado != 'eliminado');;
       }else{
         return this.pedidos.filter(item => item.estado == this.filtroEstado);
       }

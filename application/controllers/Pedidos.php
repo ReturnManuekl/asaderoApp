@@ -31,9 +31,9 @@ class Pedidos extends CI_Controller {
 		$this->load->view('components/footer', true);
 	}
 
-	public function obtener_listado(){
+	public function obtener_listado($fecha){
 		$this->load->model('Pedidos_m');
-		$listado = $this->Pedidos_m->listadoPedidos();
+		$listado = $this->Pedidos_m->listadoPedidos($fecha);
 		echo json_encode($listado);
 	}
 
@@ -43,6 +43,24 @@ class Pedidos extends CI_Controller {
 		$nuevoEstado = $data['nuevoEstado'];
 		$this->load->model('Pedidos_m');
 		$resultado = $this->Pedidos_m->actualizarEstadoPedido($idPedido,$nuevoEstado);
+		echo $resultado ? '{"result":true}' : '{"result":false}';
+	}
+
+	public function agregarPedido(){
+		$data = json_decode(file_get_contents('php://input'), true);
+		$datos = [
+			'paquetes' => $data['paquetes'],
+			'productos' => $data['productosExtra'],
+			'domicilio' => $data['domicilio'],
+			'nombre_persona' => $data['cliente'],
+			'hora_creacion' => $data['hora_creacion'],
+			'hora_entrega' => $data['hora_entrega'],
+			'dia_creacion' => date("Y-m-d"),
+			'total' => $data['total'],
+			'estado' => 'preparando'
+		];
+		$this->load->model('Pedidos_m');
+		$resultado = $this->Pedidos_m->agregarPedidoM($datos);
 		echo $resultado ? '{"result":true}' : '{"result":false}';
 	}
 	

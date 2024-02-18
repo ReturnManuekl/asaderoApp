@@ -2,6 +2,9 @@
 *{
     font-family: 'Roboto';
 }
+#pedidosListadoSection > div{
+    min-height: 100vh;
+}
 .bg-naranja {
     /*background-color: #FF914D;*/
     background: linear-gradient(0deg, rgba(255,198,111,1) 0%, rgba(255,145,77,1) 100%);
@@ -30,23 +33,74 @@ h1 {
     font-size: 40px !important;
     font-weight: bold !important;
 }
-.est-preparando{
+.est-preparando > td:nth-child(1){
     border-left: 5px solid #77df84;
 }
-.est-en_camino{
+.est-preparando > td{
+    background-color: #d1e7dd !important;
+}
+.est-en_camino > td:nth-child(1){
     border-left: 5px solid #188aff;
 }
-.est-entregado{
+.est-en_camino > td{
+    background-color: #cfe2ff !important;
+}
+.est-entregado > td:nth-child(1){
     border-left: 5px solid #1e1e1e;
 }
+.est-entregado > td{
+    background-color: #ced4da !important;
+}
 table.listado{
-    border-collapse: separate; 
-    border-spacing: 10px;
+    border-collapse: separate;
+    border-spacing: 0px 10px;
 }
 table.listado td{
     vertical-align: middle;
 }
-
+.text-wrap-balance{
+    text-wrap: balance;
+}
 .btn-paquete1 {
     background-color: rgb(66, 87, 87) !important;
+}
+/* Nuevo Pedido Paquetes */ 
+.NPP-contenedor-boton{
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    padding: 10px 5px;
+    background-color: #f8f7f6;
+}
+.texto-paquete{
+    font-size: 18px;
+    font-weight: 600;
+    color: #212529;
+    margin-bottom: 10px;
+    letter-spacing: 0.7px;
+}
+.NPP-contenedor-boton .contador-items{
+    font-size: 32px;
+    color: #212529;
+    font-weight: 800;
+    text-align: center;
+    width: 100%;
+    line-height: 25px;
+}
+.NPP-contenedor-boton button{
+    font-size: 30px;
+    font-weight: 600;
+    color: #212529;
+    margin-bottom: 0px;
+}
+.total-header{
+    padding: 20px;
+}
+.btn:focus-visible, .btn:hover{
+    background-color: inherit !important;
+    color: inherit !important;
+    border-color: transparent !important;
+    box-shadow: inherit !important;
+}.border-transparent{
+    border-color: transparent !important;
 }
